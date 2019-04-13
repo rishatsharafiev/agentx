@@ -91,12 +91,12 @@ cd devops && docker-compose -p docker-compose -p agentx build
 
 ### Docker Compose up
 ```
-docker-compose -p agentx up --force-recreate -d
+docker-compose -p agentx up --force-recreate
 ```
 
 ### Connect to docker
 ```
-docker exec -it docker-compose -p agentx_app_1 sh
+docker exec -it agentx_app_1 sh
 ```
 
 ### Static and media
