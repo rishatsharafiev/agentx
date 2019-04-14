@@ -25,3 +25,10 @@ class Employee(models.Model):
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
+
+    def get_gender_name(self):
+        """Get gender name"""
+        try:
+            return Employee.GENDER_CHOICES[self.gender][1]
+        except (IndexError, TypeError):
+            return None
