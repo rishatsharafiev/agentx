@@ -1,8 +1,9 @@
 from utils.decorators import json_request, json_response
 from utils.views import BaseView
 
-from ..models import Employee
 from ..forms import EmployeeForm
+from ..models import Employee
+
 
 class EmployeeView(BaseView):
     """Employee View"""
@@ -47,7 +48,7 @@ class EmployeeView(BaseView):
             employee_form = EmployeeForm(json)
             if employee_form.is_valid():
                 employee = employee_form.save()
-                
+
                 response = {
                     "data": {
                         "kind": "employee",
@@ -82,7 +83,6 @@ class EmployeeView(BaseView):
     @json_request
     def patch(self, request, pk=None):
         """Patch employee"""
-
         try:
             employee = Employee.objects.get(pk=pk)
             json = request.json
@@ -137,11 +137,9 @@ class EmployeeView(BaseView):
 
         return response
 
-
     @json_response
     def delete(self, request, pk=None):
         """Delete employee"""
-
         employee_id, _ = Employee.objects.filter(pk=pk).delete()
 
         if employee_id:
