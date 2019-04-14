@@ -14,7 +14,9 @@ def json_response(f):
             if 'error' in result:
                 try:
                     response.status_code = int(result.get('error', {}).get('code'))
-                except TypeError:
+                except ValueError:
+                    result['error']['code'] = 500
+                    response = JsonResponse(result)
                     response.status_code = 500
         return response
     return wrapped

@@ -1,4 +1,4 @@
-from utils.decorators import json_response
+from utils.decorators import json_request, json_response
 from utils.views import BaseView
 
 
@@ -16,22 +16,22 @@ class EmployeeView(BaseView):
             }
         }
 
-        # response_data = {
-        #     "apiVersion": "1.0",
-        #     "id": 123,
-        #     "method": "POST",
-        #     "data": {
-        #         "kind": "album",
-        #         "fields": "author,id",
-        #         "id": 12,
-        #         "updated": "2007-11-06T16:34:41.000Z",
-        #         "items": [
-        #             {
-        #                 "title": "A deleted entry",
-        #                 "deleted": True
-        #             }
-        #         ]
-        #     }
-        # }
-
         return response_error
+
+    @json_response
+    @json_request
+    def post(self, request):
+        """Post employee"""
+        response_data = {
+            "apiVersion": "1.0",
+            "id": 123,
+            "method": "POST",
+            "data": {
+                "kind": "album",
+                "fields": "author,id",
+                "id": 12,
+                "json": request.json
+            }
+        }
+
+        return response_data
