@@ -102,16 +102,23 @@ class EmployeeView(BaseView):
                         }
                     }
 
+                    fields = ["id"]
                     if employee.first_name is not None:
                         response["data"]["first_name"] = employee.first_name
+                        fields.append("first_name")
                     if employee.last_name is not None:
                         response["data"]["last_name"] = employee.last_name
+                        fields.append("last_name")
                     if employee.gender is not None:
                         response["data"]["gender"] = employee.get_gender_name()
+                        fields.append("gender")
                     if employee.birth_day is not None:
                         response["data"]["birth_day"] = employee.birth_day
+                        fields.append("birth_day")
                     if employee.email is not None:
                         response["data"]["email"] = employee.email
+                        fields.append("email")
+                    response["data"]["fields"] = ",".join(fields)
                 else:
                     response = {
                         'error': {
