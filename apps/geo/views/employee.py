@@ -93,19 +93,25 @@ class EmployeeView(BaseView):
                 employee_form.fields['last_name'].required = False
 
                 if employee_form.is_valid():
-                    employee = employee_form.save(update_fields=json.keys())
+                    employee.save(update_fields=json.keys())
 
                     response = {
                         "data": {
                             "kind": "employee",
-                            "id": employee.id,
-                            "first_name": employee.first_name,
-                            "last_name": employee.last_name,
-                            "gender": employee.get_gender_name(),
-                            "birth_day": employee.birth_day,
-                            "email": employee.email
+                            "id": employee.id
                         }
                     }
+
+                    if employee.first_name is not None:
+                        response["data"]["first_name"] = employee.first_name
+                    if employee.last_name is not None:
+                        response["data"]["last_name"] = employee.last_name
+                    if employee.gender is not None:
+                        response["data"]["gender"] = employee.get_gender_name()
+                    if employee.birth_day is not None:
+                        response["data"]["birth_day"] = employee.birth_day
+                    if employee.email is not None:
+                        response["data"]["email"] = employee.email
                 else:
                     response = {
                         'error': {
