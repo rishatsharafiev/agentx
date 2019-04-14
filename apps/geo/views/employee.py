@@ -130,3 +130,27 @@ class EmployeeView(BaseView):
             }
 
         return response
+
+
+    @json_response
+    def delete(self, request, pk=None):
+        """Delete employee"""
+
+        employee_id, _ = Employee.objects.filter(pk=pk).delete()
+
+        if employee_id:
+            response = {
+                "data": {
+                    "kind": "employee",
+                    "id": employee_id,
+                }
+            }
+        else:
+            response = {
+                'error': {
+                    'code': 404,
+                    'message': 'Employee not founded'
+                }
+            }
+
+        return response
