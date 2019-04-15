@@ -25,7 +25,7 @@ class LocationView(BaseView):
                 "longitude": location.longitude,
                 "created_at": timezone.localtime(location.created_at)
             } for location in locations]
-            
+
             response = {
                 "apiVersion": "1.0",
                 "id": pk,
