@@ -31,6 +31,9 @@ python manage.py runserver
 ```
 
 ### API
+**Получить последние местоположения всех сотрудников**
+GET http://localhost:8000/geo/employee/locations/
+
 **Получение сотрудника по pk**
 GET http://localhost:8000/geo/employee/1/
 
