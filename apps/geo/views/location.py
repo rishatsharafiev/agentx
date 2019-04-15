@@ -1,9 +1,8 @@
 from django.core.exceptions import ValidationError
 from django.utils import timezone
-from utils.decorators import json_request, json_response
+from utils.decorators import json_response
 from utils.views import BaseView
 
-from ..forms import LocationForm
 from ..models import Location
 
 
@@ -42,39 +41,6 @@ class LocationView(BaseView):
                     'code': 422,
                     'message': 'Validation Error',
                     'errors': str(exp)
-                }
-            }
-
-        return response
-
-    @json_response
-    @json_request
-    def post(self, request):
-        """Post location"""
-        json = request.json
-
-        if json:
-            location_form = LocationForm(json)
-            if location_form.is_valid():
-                response = {
-                    "data": {
-                        "kind": "employee",
-                        "fields": "id,first_name,last_name",
-                    }
-                }
-            else:
-                response = {
-                    'error': {
-                        'code': 422,
-                        'message': 'Validation Error',
-                        'errors': location_form.errors
-                    }
-                }
-        else:
-            response = {
-                'error': {
-                    'code': 404,
-                    'message': 'Empty json',
                 }
             }
 

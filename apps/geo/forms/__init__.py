@@ -1,4 +1,4 @@
 """Forms"""
 
 from .employee import EmployeeForm
-from .location import LocationForm
+from .location_parameters import LocationParametersForm
